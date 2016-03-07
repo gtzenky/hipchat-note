@@ -1,5 +1,5 @@
 {
-  "key": "my-add-on",
+  "key": "hipchat-note",
   "name": "Hello!",
   "description": "My very first HipChat add-on",
   "vendor": {
@@ -18,17 +18,9 @@
       ]
     },
     "installable": {
+      "allowGlobal": true,
+      "allowRoom": false,
       "callbackUrl": "{{localBaseUrl}}/installable"
-    },
-    "configurable": {
-      "url": "{{localBaseUrl}}/config"
-    },
-    "webhook": {
-      "url": "{{localBaseUrl}}/webhook",
-      "pattern": "^/hello",
-      "event": "room_message",
-      "name": "Hello!",
-      "authentication": "jwt"
     },
     "glance": [
       {
@@ -52,39 +44,6 @@
         },
         "location": "hipchat.sidebar.right",
         "url": "{{localBaseUrl}}/sidebar"
-      }
-    ],
-    "dialog": [
-      {
-        "key": "sample.dialog",
-        "title": {
-          "value": "Hello Dialog!"
-        },
-        "url": "{{localBaseUrl}}/dialog",
-        "options": {
-          "style": "normal",
-          "primaryAction": {
-            "name": {
-              "value": "Say Hello!"
-            },
-            "key": "sample.dialog.action",
-            "enabled": true
-          },
-          "size": {
-            "width": "400px",
-            "height": "200px"
-          }
-        }
-      }
-    ],
-    "action": [
-      {
-        "key": "sample.action",
-        "name": {
-          "value": "Open Hello Dialog!"
-        },
-        "target": "sample.dialog",
-        "location": "hipchat.input.action"
       }
     ]
   }
