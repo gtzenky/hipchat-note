@@ -61,7 +61,7 @@ module.exports = function (app, addon) {
 
   // This is an example sidebar controller that can be launched when clicking on the glance.
   // https://developer.atlassian.com/hipchat/guide/dialog-and-sidebar-views/sidebar
-  app.get('/sidebar',
+  app.get('/glance-sidebar',
     addon.authenticate(),
     function (req, res) {
       res.render('sidebar', {

@@ -42,6 +42,8 @@ var devEnv = app.get('env') == 'development';
 
 // Load the HipChat AC compat layer
 var hipchat = require('atlassian-connect-express-hipchat')(addon, app);
+var models = require('./lib/notemodels')(addon);
+addon.models = models;
 
 // The following settings applies to all environments
 app.set('port', port);

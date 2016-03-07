@@ -28,8 +28,8 @@
           "value": "Hello!"
         },
         "queryUrl": "{{localBaseUrl}}/glance",
-        "key": "sample.glance",
-        "target": "sample.sidebar",
+        "key": "glance",
+        "target": "glance.sidebar",
         "icon": {
           "url": "{{localBaseUrl}}/img/logo.png",
           "url@2x": "{{localBaseUrl}}/img/logo.png"
@@ -38,12 +38,12 @@
     ],
     "webPanel": [
       {
-        "key": "sample.sidebar",
+        "key": "glance.sidebar",
         "name": {
           "value": "Hello Sidebar!"
         },
         "location": "hipchat.sidebar.right",
-        "url": "{{localBaseUrl}}/sidebar"
+        "url": "{{localBaseUrl}}/glance-sidebar"
       }
     ]
   }
