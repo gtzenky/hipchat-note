@@ -68,7 +68,14 @@ module.exports = function (app, addon) {
         identity: req.identity
       });
     }
-    );
+  );
+  
+  app.post('update-content',
+    addon.authenticate(),
+    function(req, res) {
+      res.sendStatus(200);
+    }
+  )
 
   // Notify the room that the add-on was installed. To learn more about
   // Connect's install flow, check out:

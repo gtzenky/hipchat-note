@@ -7,37 +7,51 @@
   <div class="aui-row">
     <div class="aui-item">
       <h3>Your sidebar goes here!</h3>
-      <ul>
-        <li>Group ID: {{identity.groupId}}</li>
-        <li>
-          Room ID: {{identity.roomId}}
-          <small>
-            <a href="#" id="room">room details</a> |
-            <a href="#" id="participants">participants</a>
-          </small>
-        </li>
-        <li>
-          User ID: {{identity.userId}}
-          <small>
-            <a href="#" id="user">user details</a>
-          </small>
-        </li>
-      </ul>
-    </div>
-  </div>
-  <br>
-
-  <div class="aui-row">
-    <div class="aui-item">
-      <h4 id="details-title"></h4>
-      <pre id="details"></pre>
-    </div>
-  </div>
-  <br>
-
-  <div class="aui-row">
-    <div class="aui-item">
-      <button id="say_hello" class="aui-button">Say Hello!</button>
+      <form id="update-content-form" class="aui top-label" action="update-content" method="POST">
+        <fieldset class="top-label">
+          <div class="field-group top-label">
+            <label for="content">Content</label>
+            <textarea type="text" id="content" name="content" rows="10"
+              class="full-width-field"
+              placeholder="content"
+              value="{{content}}"
+              data-aui-validation-field 
+              data-aui-form-notification-position="bottom"></textarea>
+            <div id="formError" class="error" style="display: none"></div>
+          </div>
+        </fieldset>
+        <button class="aui-button">Button</button>
+    </form>
     </div>
   </div>
 </div>
+
+<script>
+  AJS.$('#update-content-form').on('aui-valid-submit', function(event) {
+    event.preventDefault();
+    var form = event.target;
+    var data = $(form).serializeObject();
+    var url = form.action;
+    var method = form.method;
+    $.ajax({
+      url: url,
+      type: method,
+      headers: { 'Authorization': 'JWT {{signed_request}}' },
+      data: {
+        groupId: '{{identity.groupId}}',
+        roomId: '{{identity.roomId}}',
+        content: data.content
+      },
+      success: function(response) {
+      },
+      error: function(error) {
+        var formError = AJS.$('#formError');
+        formError.text(error.responseText);
+        formError.show();
+        setTimeout(function() {
+          formError.hide();
+        }, 5000);
+      }
+    });
+  });
+</script>
