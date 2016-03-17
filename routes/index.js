@@ -64,15 +64,22 @@ module.exports = function (app, addon) {
   app.get('/glance-sidebar',
     addon.authenticate(),
     function (req, res) {
-      res.render('sidebar', {
-        identity: req.identity
-      });
+      var identity = req.identity;
+      addon.models.noteContent.findByGroupIdAndRoomId(identity.groupId, identity.roomId)
+      .then(function(noteContent) {
+        res.render('sidebar', {
+          identity: identity,
+          content: noteContent.content
+        });
+      })
     }
   );
   
-  app.post('update-content',
+  app.post('/update-content',
     addon.authenticate(),
     function(req, res) {
+      var noteContent = req.body;
+      addon.models.noteContent.upsert(noteContent);
       res.sendStatus(200);
     }
   )
