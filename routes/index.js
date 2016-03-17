@@ -79,8 +79,12 @@ module.exports = function (app, addon) {
     addon.authenticate(),
     function(req, res) {
       var noteContent = req.body;
-      addon.models.noteContent.upsert(noteContent);
-      res.sendStatus(200);
+      addon.models.noteContent.upsert(noteContent)
+      .then(function() {
+        res.sendStatus(200);
+      }).catch(function(err){
+        res.send(500, err.message);
+      });
     }
   )
 

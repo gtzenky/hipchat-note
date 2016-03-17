@@ -16,7 +16,6 @@
               placeholder="content"
               data-aui-validation-field 
               data-aui-form-notification-position="bottom">{{content}}</textarea>
-            <div id="formError" class="error" style="display: none"></div>
           </div>
         </fieldset>
         <button class="aui-button">Button</button>
@@ -42,14 +41,21 @@
         content: data.content
       },
       success: function(response) {
+        AJS.flag({
+            type: 'success',
+            title: 'Saved successfully',
+            body: 'Configuration has been updated',
+            close: 'auto'
+        });
       },
       error: function(error) {
         var formError = AJS.$('#formError');
-        formError.text(error.responseText);
-        formError.show();
-        setTimeout(function() {
-          formError.hide();
-        }, 5000);
+        AJS.flag({
+            type: 'error',
+            title: 'Error',
+            body: error.responseText,
+            close: 'auto'
+        });;
       }
     });
   });
